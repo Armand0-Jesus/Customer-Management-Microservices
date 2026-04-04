@@ -1,0 +1,8 @@
+.env
+.idea/
+*.log
+Check.java
+Check.class
+H2Check.java
+H2Check.class
+infrastructure/target/

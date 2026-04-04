@@ -50,14 +50,14 @@ public class LocalStack extends Stack {
     DatabaseInstance authServiceDb =
         createDatabase("AuthServiceDB", "auth-service-db");
 
-    DatabaseInstance patientServiceDb =
-        createDatabase("PatientServiceDB", "patient-service-db");
+    DatabaseInstance customerServiceDb =
+        createDatabase("CustomerServiceDB", "customer-service-db");
 
     CfnHealthCheck authDbHealthCheck =
         createDbHealthCheck(authServiceDb, "AuthServiceDBHealthCheck");
 
-    CfnHealthCheck patientDbHealthCheck =
-        createDbHealthCheck(patientServiceDb, "PatientServiceDBHealthCheck");
+    CfnHealthCheck customerDbHealthCheck =
+        createDbHealthCheck(customerServiceDb, "CustomerServiceDBHealthCheck");
 
     CfnCluster mskCluster = createMskCluster();
 
@@ -73,9 +73,9 @@ public class LocalStack extends Stack {
     authService.getNode().addDependency(authDbHealthCheck);
     authService.getNode().addDependency(authServiceDb);
 
-    FargateService billingService =
-        createFargateService("BillingService",
-            "billing-service",
+    FargateService paymentProfileService =
+        createFargateService("PaymentProfileService",
+            "payment-profile-service",
             List.of(4001,9001),
             null,
             null);
@@ -89,26 +89,26 @@ public class LocalStack extends Stack {
 
     analyticsService.getNode().addDependency(mskCluster);
 
-    FargateService patientService = createFargateService("PatientService",
-        "patient-service",
+    FargateService customerService = createFargateService("CustomerService",
+        "customer-service",
         List.of(4000),
-        patientServiceDb,
+        customerServiceDb,
         Map.of(
             "BILLING_SERVICE_ADDRESS", "host.docker.internal",
             "BILLING_SERVICE_GRPC_PORT", "9001"
         ));
-    patientService.getNode().addDependency(patientServiceDb);
-    patientService.getNode().addDependency(patientDbHealthCheck);
-    patientService.getNode().addDependency(billingService);
-    patientService.getNode().addDependency(mskCluster);
+    customerService.getNode().addDependency(customerServiceDb);
+    customerService.getNode().addDependency(customerDbHealthCheck);
+    customerService.getNode().addDependency(paymentProfileService);
+    customerService.getNode().addDependency(mskCluster);
 
     createApiGatewayService();
   }
 
   private Vpc createVpc(){
     return Vpc.Builder
-        .create(this, "PatientManagementVPC")
-        .vpcName("PatientManagementVPC")
+        .create(this, "CustomerManagementVPC")
+        .vpcName("CustomerManagementVPC")
         .maxAzs(2)
         .build();
   }
@@ -157,10 +157,10 @@ public class LocalStack extends Stack {
   }
 
   private Cluster createEcsCluster(){
-    return Cluster.Builder.create(this, "PatientManagementCluster")
+    return Cluster.Builder.create(this, "CustomerManagementCluster")
         .vpc(vpc)
         .defaultCloudMapNamespace(CloudMapNamespaceOptions.builder()
-            .name("patient-management.local")
+            .name("customer-management.local")
             .build())
         .build();
   }

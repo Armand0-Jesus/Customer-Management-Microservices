@@ -1,0 +1,11 @@
+PUT http://localhost:4000/customers/123e4567-e89b-12d3-a456-426614174000
+Content-Type: application/json
+
+{
+  "fullName": "John Doe Rivera",
+  "email": "john.doe.updated@example.com",
+  "shippingAddress": "27 Calle Recinto Sur, San Juan, Puerto Rico 00901",
+  "preferredDropDate": "2025-11-01"
+}
+
+###

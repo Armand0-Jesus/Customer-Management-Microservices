@@ -41,8 +41,7 @@ public class AuthController {
   @GetMapping("/validate")
   public ResponseEntity<Void> validateToken(
       @RequestHeader("Authorization") String authHeader) {
-
-    // Authorization: Bearer <token>
+    
     if(authHeader == null || !authHeader.startsWith("Bearer ")) {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }

@@ -1,0 +1,7 @@
+GRPC localhost:9001/PaymentProfileService/CreatePaymentProfile
+
+{
+  "customertId": "48501",
+  "fullName" : "Marie Murphy",
+  "email" : "murphy2001@example.com"
+}
