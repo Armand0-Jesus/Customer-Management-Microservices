@@ -35,6 +35,19 @@ public class CustomerService {
     return customers.stream().map(CustomerMapper::toDTO).toList();
   }
 
+  public List<CustomerResponseDTO> searchCustomers(String query) {
+    if (query == null || query.isBlank()) {
+      return getCustomers();
+    }
+
+    String normalizedQuery = query.trim();
+    List<Customer> customers =
+        customerRepository.findByFullNameContainsIgnoreCaseOrEmailContainingIgnoreCaseOrShippingAddressContainingIgnoreCase(
+            normalizedQuery, normalizedQuery, normalizedQuery);
+
+    return customers.stream().map(CustomerMapper::toDTO).toList();
+  }
+
   public CustomerResponseDTO createCustomer(CustomerRequestDTO customerRequestDTO) {
     if (customerRepository.existsByEmail(customerRequestDTO.getEmail())) {
       throw new EmailAlreadyExistsException(

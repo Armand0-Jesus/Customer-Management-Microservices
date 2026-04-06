@@ -6,3 +6,8 @@ Check.class
 H2Check.java
 H2Check.class
 infrastructure/target/
+.venv/
+__pycache__/
+*.pyc
+*.iml
+target/

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,6 +36,14 @@ public class CustomerController {
   @Operation(summary = "Get Customers")
   public ResponseEntity<List<CustomerResponseDTO>> getCustomers() {
     List<CustomerResponseDTO> customers = customerService.getCustomers();
+    return ResponseEntity.ok().body(customers);
+  }
+
+  @GetMapping("/search")
+  @Operation(summary = "Search for Customers")
+  public ResponseEntity<List<CustomerResponseDTO>> searchCustomers(
+      @RequestParam(required = false) String query) {
+    List<CustomerResponseDTO> customers = customerService.searchCustomers(query);
     return ResponseEntity.ok().body(customers);
   }
 
