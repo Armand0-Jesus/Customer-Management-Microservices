@@ -5,7 +5,7 @@ Content-Type: application/json
   "fullName": "John Doe Rivera",
   "email": "john.doe.updated@example.com",
   "shippingAddress": "27 Calle Recinto Sur, San Juan, Puerto Rico 00901",
-  "preferredDropDate": "2025-11-01"
+  "preferredDropDate": "2026-04-25"
 }
 
 ###

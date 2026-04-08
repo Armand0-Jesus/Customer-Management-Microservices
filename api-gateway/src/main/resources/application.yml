@@ -1,38 +1,65 @@
 server:
-  port: 4004
+  port: ${SERVER_PORT:4004}
 
 auth:
   service:
-    url: http://localhost:4005
+    url: ${AUTH_SERVICE_URL:http://localhost:4005}
+
+customer:
+  service:
+    url: ${CUSTOMER_SERVICE_URL:http://localhost:4000}
+
+rate-limit:
+  default:
+    replenish-rate: ${RATE_LIMIT_DEFAULT_REPLENISH_RATE:20}
+    burst-capacity: ${RATE_LIMIT_DEFAULT_BURST_CAPACITY:40}
+    requested-tokens: ${RATE_LIMIT_DEFAULT_REQUESTED_TOKENS:1}
+  auth:
+    replenish-rate: ${RATE_LIMIT_AUTH_REPLENISH_RATE:4}
+    burst-capacity: ${RATE_LIMIT_AUTH_BURST_CAPACITY:8}
+    requested-tokens: ${RATE_LIMIT_AUTH_REQUESTED_TOKENS:1}
+  error-message: ${RATE_LIMIT_ERROR_MESSAGE:You have exceeded the rate limit. Retry later.}
 
 spring:
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
   cloud:
     gateway:
       routes:
         - id: auth-service-route
-          uri: http://localhost:4005
+          uri: ${auth.service.url}
           predicates:
             - Path=/auth/**
           filters:
             - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                rate-limiter: "#{@authRouteRateLimiter}"
+                key-resolver: "#{@clientIpKeyResolver}"
 
         - id: customer-service-route
-          uri: http://localhost:4000
+          uri: ${customer.service.url}
           predicates:
             - Path=/api/customers/**
           filters:
             - StripPrefix=1
             - JwtValidation
+            - name: RequestRateLimiter
+              args:
+                rate-limiter: "#{@businessRouteRateLimiter}"
+                key-resolver: "#{@clientIpKeyResolver}"
 
         - id: api-docs-customer-route
-          uri: http://localhost:4000
+          uri: ${customer.service.url}
           predicates:
             - Path=/api-docs/customers
           filters:
             - RewritePath=/api-docs/customers,/v3/api-docs
 
         - id: api-docs-auth-route
-          uri: http://localhost:4005
+          uri: ${auth.service.url}
           predicates:
             - Path=/api-docs/auth
           filters:

@@ -8,9 +8,12 @@ import org.junit.jupiter.api.Test;
 
 public class AuthIntegrationTest {
 
+  private static final String BASE_URI = System.getProperty("gateway.base-uri",
+      System.getenv().getOrDefault("GATEWAY_BASE_URI", "http://localhost:4004"));
+
   @BeforeAll
   static void setUp(){
-    RestAssured.baseURI = "http://localhost:4004";
+    RestAssured.baseURI = BASE_URI;
   }
 
   @Test

@@ -1,14 +1,18 @@
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.greaterThan;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class CustomerIntegrationTest {
+
+  private static final String BASE_URI = System.getProperty("gateway.base-uri",
+      System.getenv().getOrDefault("GATEWAY_BASE_URI", "http://localhost:4004"));
+
   @BeforeAll
   static void setUp(){
-    RestAssured.baseURI = "http://localhost:4004";
+    RestAssured.baseURI = BASE_URI;
   }
 
   @Test
@@ -37,6 +41,6 @@ public class CustomerIntegrationTest {
         .get("/api/customers")
         .then()
         .statusCode(200)
-        .body("customers", notNullValue());
+        .body("size()", greaterThan(0));
   }
 }

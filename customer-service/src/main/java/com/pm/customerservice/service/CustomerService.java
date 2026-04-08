@@ -10,8 +10,13 @@ import com.pm.customerservice.mapper.CustomerMapper;
 import com.pm.customerservice.model.Customer;
 import com.pm.customerservice.repository.CustomerRepository;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,12 +34,15 @@ public class CustomerService {
     this.kafkaProducer = kafkaProducer;
   }
 
+  @Cacheable(cacheNames = "customers", key = "'all'")
   public List<CustomerResponseDTO> getCustomers() {
     List<Customer> customers = customerRepository.findAll();
-
-    return customers.stream().map(CustomerMapper::toDTO).toList();
+    return mapCustomers(customers);
   }
 
+  @Cacheable(cacheNames = "customerSearch",
+      key = "#query == null ? '' : #query.trim().toLowerCase()",
+      condition = "#query != null && !#query.isBlank()")
   public List<CustomerResponseDTO> searchCustomers(String query) {
     if (query == null || query.isBlank()) {
       return getCustomers();
@@ -45,9 +53,13 @@ public class CustomerService {
         customerRepository.findByFullNameContainsIgnoreCaseOrEmailContainingIgnoreCaseOrShippingAddressContainingIgnoreCase(
             normalizedQuery, normalizedQuery, normalizedQuery);
 
-    return customers.stream().map(CustomerMapper::toDTO).toList();
+    return mapCustomers(customers);
   }
 
+  @Caching(evict = {
+      @CacheEvict(cacheNames = "customers", allEntries = true),
+      @CacheEvict(cacheNames = "customerSearch", allEntries = true)
+  })
   public CustomerResponseDTO createCustomer(CustomerRequestDTO customerRequestDTO) {
     if (customerRepository.existsByEmail(customerRequestDTO.getEmail())) {
       throw new EmailAlreadyExistsException(
@@ -66,6 +78,10 @@ public class CustomerService {
     return CustomerMapper.toDTO(newCustomer);
   }
 
+  @Caching(evict = {
+      @CacheEvict(cacheNames = "customers", allEntries = true),
+      @CacheEvict(cacheNames = "customerSearch", allEntries = true)
+  })
   public CustomerResponseDTO updateCustomer(UUID id,
       CustomerRequestDTO customerRequestDTO) {
 
@@ -88,7 +104,17 @@ public class CustomerService {
     return CustomerMapper.toDTO(updatedCustomer);
   }
 
+  @Caching(evict = {
+      @CacheEvict(cacheNames = "customers", allEntries = true),
+      @CacheEvict(cacheNames = "customerSearch", allEntries = true)
+  })
   public void deleteCustomer(UUID id) {
     customerRepository.deleteById(id);
+  }
+
+  private List<CustomerResponseDTO> mapCustomers(List<Customer> customers) {
+    return customers.stream()
+        .map(CustomerMapper::toDTO)
+        .collect(Collectors.toCollection(ArrayList::new));
   }
 }

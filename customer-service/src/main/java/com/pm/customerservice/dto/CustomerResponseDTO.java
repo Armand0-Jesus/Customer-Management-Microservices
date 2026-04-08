@@ -1,6 +1,12 @@
 package com.pm.customerservice.dto;
 
-public class CustomerResponseDTO {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class CustomerResponseDTO implements Serializable {
+  @Serial
+  private static final long serialVersionUID = 1L;
+
   private String id;
   private String fullName;
   private String email;
