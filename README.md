@@ -27,7 +27,7 @@
 </details>
 
 ### Description
-This is a enterprise emulating customer-management system which includes JWT based authenticationm, usage of gRPc and REST Api's, Kafka event flows and both load and integration testing. The main operations of the customer management system include:
+This is a enterprise emulating customer-management system which includes JWT based authenticationm, usage of gRPc and REST Api's, rate limiting, caching, Kafka event flows and both load and integration testing. The main operations of the customer management system include:
 
 - Creating customers
 - Getting all customers
