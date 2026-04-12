@@ -27,7 +27,7 @@
 </details>
 
 ## About The Project
-This is a enterprise emulating customer-management system which includes JWT based authenticationm, usage of gRPc and REST Api's, rate limiting, caching, Kafka event flows and both load and integration testing. The main operations of the customer management system include:
+This is an enterprise-style customer management system which includes JWT-based authentication, usage of gRPC and REST APIs, rate limiting, caching, Kafka event flows and both load and integration testing. The main operations of the customer management system include:
 
 - Creating customers
 - Getting all customers
@@ -193,7 +193,7 @@ Some of the documentation and recourses which helped for the creation of this pr
 - [Locust Documentation](https://docs.locust.io/)
 - [REST Assured Documentation](https://rest-assured.io/)
 - [Best README Template](https://github.com/othneildrew/Best-README-Template)
-- [YouTube reference](https://www.youtube.com/watch?v=tseqdcFfTUY&t=1s)
+- [YouTube Reference](https://www.youtube.com/watch?v=tseqdcFfTUY&t=1s)
 
 
 
