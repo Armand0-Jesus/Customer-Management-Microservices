@@ -1,11 +1,10 @@
 # Customer Managing Microservices System
-### Video Demo: https://youtu.be/vyg6HWjid0w
 
 <details>
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#description">Description</a>
+      <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -25,7 +24,7 @@
   </ol>
 </details>
 
-## Description
+## About The Project
 This is an enterprise-style customer management system which includes JWT-based authentication, usage of gRPC and REST APIs, rate limiting, caching, Kafka event flows and both load and integration testing. The main operations of the customer management system include:
 
 - Creating customers
