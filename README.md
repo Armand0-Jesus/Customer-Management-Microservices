@@ -40,7 +40,7 @@ section!
 
 ### Built With
 
-#### Core Stack
+#### Core Stack:
 
 - [![Java][Java]][Java-url]
 - [![Spring Boot][SpringBoot]][SpringBoot-url]
@@ -50,7 +50,7 @@ section!
 - [![gRPC][gRPC]][gRPC-url]
 - [![Docker][Docker]][Docker-url]
 
-#### Tooling and Testing
+#### Tooling and Testing:
 
 - [![Maven][Maven]][Maven-url]
 - [![Python][Python]][Python-url]
@@ -66,6 +66,11 @@ section!
 
 
 ### Architecture
+
+Below is a diagram of the arhictecture of this project which shows how all thhe services are conected and how they function:
+
+![System Architecture](https://github.com/user-attachments/assets/...)<img width="1575" height="680" alt="Screenshot 2026-04-09 122544" src="https://github.com/user-attachments/assets/7021acfd-8358-4600-9d0a-37815a1f6ee9" />
+
 
 
 ### Acknowledgments
