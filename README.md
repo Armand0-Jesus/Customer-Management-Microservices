@@ -40,18 +40,6 @@ section!
 
 ### Built With
 
-- [![Java][Java]][Java-url]
-- [![Spring Boot][SpringBoot]][SpringBoot-url]
-- [![PostgreSQL][PostgreSQL]][PostgreSQL-url]
-- [![Redis][Redis]][Redis-url]
-- [![Apache Kafka][Kafka]][Kafka-url]
-- [![gRPC][gRPC]][gRPC-url]
-- [![Docker][Docker]][Docker-url]
-- [![Maven][Maven]][Maven-url]
-- [![Python][Python]][Python-url]
-- [![JUnit][JUnit]][JUnit-url]
-- [![REST Assured][RestAssured]][RestAssured-url]
-- [![Locust][Locust]][Locust-url]
 #### Core Stack
 
 - [![Java][Java]][Java-url]
