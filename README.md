@@ -26,7 +26,7 @@
   </ol>
 </details>
 
-### Description
+## About The Project
 This is a enterprise emulating customer-management system which includes JWT based authenticationm, usage of gRPc and REST Api's, rate limiting, caching, Kafka event flows and both load and integration testing. The main operations of the customer management system include:
 
 - Creating customers
@@ -38,7 +38,7 @@ This is a enterprise emulating customer-management system which includes JWT bas
 For a visual representation of how the system works refer to the architecture
 section!
 
-### Built With
+## Built With
 
 #### Core Stack:
 
@@ -59,14 +59,14 @@ section!
 - [![Locust][Locust]][Locust-url]
 
 
-### Installation
+## Installation
 
-IF you want to use the proyect locally without the docker containers install:
+IF you want to use the project locally without docker install:
 
 - Java 21
 - Maven
 - Python 3 and Locust for testing
-- Get a randomly generated JSON token (JWT_SECRET) which can be done by running AuthIntegrationTest.Java in the integration-test folder
+- Get a randomly generated JSON token (JWT_SECRET), which can be done by running AuthIntegrationTest.Java in the integration-test folder
 
 Clone the repository:
 
@@ -87,18 +87,100 @@ Start the containerized environment for using docker:
 docker compose up --build
 ```
 
-### Usage 
+## Usage 
 
+Login:
 
-### Architecture
+```Bash
+curl -X POST http://localhost:4004/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "testuser@test.com",
+    "password": "password123"
+  }'
+```
 
-Below is a diagram of the arhictecture of this project which shows how all thhe services are conected and how they function:
+Create a customer:
+
+Here are examples of the terminal-based commands for the different functionalities of the project:
+
+Login:
+
+```Bash
+curl -X POST http://localhost:4004/api/customers \
+  -H "Content-Type: application/json" \
+  -H "Authorization: JWT_SECRET" \
+  -d '{
+    "fullName": "New Customer",
+    "email": "new.customer@example.com",
+    "shippingAddress": "123 Example Street, San Juan, Puerto Rico 00901",
+    "preferredDropDate": "2026-04-18",
+    "memberSince": "2026-04-11"
+  }'
+```
+
+Get all customers:
+
+```Bash
+curl http://localhost:4004/api/customers \
+  -H "Authorization: Bearer JWT_SECRET"
+```
+
+Update a customer:
+
+```Bash
+curl http://localhost:4004/api/customers \
+  -H "Authorization: Bearer JWT_SECRET"
+```
+
+Delete a customer:
+
+```Bash
+curl -X DELETE http://localhost:4004/api/customers/CUSTOMER_ID \
+  -H "Authorization: Bearer JWT_SECRET"
+```
+
+Search a customer:
+
+```Bash
+curl "http://localhost:4004/api/customers/search?query=john" \
+  -H "Authorization: Bearer JWT_SECRET"
+```
+
+Integration tests:
+
+```Bash
+cd integration-tests
+mvn test
+```
+
+Load tests
+```Bash
+cd load-tests/locust
+locust -f locustfile.py --host=http://localhost:4004
+```
+
+Ports for each service:
+
+- `4004` API Gateway
+- `4005` Auth Service
+- `4000` Customer Service
+- `4001` Payment Profile Service
+- `4002` Analytics Service
+- `9001` Payment Profile gRPC
+- `5433` Auth DB
+- `5434` Customer DB
+- `6379` Redis
+- `9094` Kafka 
+## Architecture
+
+Below is a diagram of the arhictecture of this project which shows how all the services are conected and how they function:
 
 ![](https://github.com/user-attachments/assets/...)<img width="1575" height="680" alt="Screenshot 2026-04-09 122544" src="https://github.com/user-attachments/assets/7021acfd-8358-4600-9d0a-37815a1f6ee9" />
 
 
 
-### Acknowledgments
+## Acknowledgments
 
 
 
