@@ -86,9 +86,9 @@ docker compose up --build
 - Java 21
 - Maven
 - Python 3 and Locust for testing
--PostgreSQL
--Redis
--Kafka
+- PostgreSQL
+- Redis
+- Kafka
 - Get a randomly generated JSON token (JWT_SECRET JWT_SECRET=replace_this_with_a_long_random_secret)
 
 
