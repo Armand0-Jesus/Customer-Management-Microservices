@@ -1,4 +1,4 @@
-# Customer Managing Microservices System
+# Customer Management Microservices System
 
 <details>
   <summary>Table of Contents</summary>
@@ -68,7 +68,7 @@ cd Customer-Management-Microservices
 
 #### Running with Docker:
 
-dd JWT_Secret to .env file:
+Add JWT_Secret to the .env file:
 
 ```Bash
 echo "JWT_SECRET=replace_this_with_a_long_random_secret" > .env
@@ -97,7 +97,7 @@ docker compose up --build
 Here are examples of the terminal-based commands for the different functionalities of the project:
 
 
-Login and get a tokem:
+Login and get a token:
 
 ```Bash
 curl -X POST http://localhost:4004/auth/login \
@@ -109,9 +109,6 @@ curl -X POST http://localhost:4004/auth/login \
 ```
 
 Create a customer:
-
-
-Login:
 
 ```Bash
 curl -X POST http://localhost:4004/api/customers \
@@ -169,7 +166,7 @@ cd integration-tests
 mvn test
 ```
 
-Load tests
+Load tests:
 ```Bash
 cd load-tests/locust
 locust -f locustfile.py --host=http://localhost:4004
@@ -189,7 +186,7 @@ Ports for each service:
 - `9094` Kafka 
 ## Architecture
 
-Below is a diagram of the arhictecture of this project which shows how all the services are conected and how they function:
+Below is a diagram of the architecture of this project which shows how all the services are connected and how they function:
 
 ![](https://github.com/user-attachments/assets/...)<img width="1575" height="680" alt="Screenshot 2026-04-09 122544" src="https://github.com/user-attachments/assets/7021acfd-8358-4600-9d0a-37815a1f6ee9" />
 
@@ -197,7 +194,7 @@ Below is a diagram of the arhictecture of this project which shows how all the s
 
 ## Acknowledgments
 
-Some of the documentation and recourses which helped for the creation of this project:
+Documentation and resources which helped for the creation of this project:
 
 - [Spring Boot Documentation](https://docs.spring.io/spring-boot/)
 - [Spring Cloud Gateway Documentation](https://docs.spring.io/spring-cloud-gateway/reference/)
