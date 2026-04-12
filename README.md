@@ -182,7 +182,18 @@ Below is a diagram of the arhictecture of this project which shows how all the s
 
 ## Acknowledgments
 
+Some of the documentation and recourses which helped for the creation of this project:
 
+- [Spring Boot Documentation](https://docs.spring.io/spring-boot/)
+- [Spring Cloud Gateway Documentation](https://docs.spring.io/spring-cloud-gateway/reference/)
+- [Spring Data Redis Documentation](https://docs.spring.io/spring-data/redis/reference/)
+- [Apache Kafka Documentation](https://kafka.apache.org/documentation/)
+- [gRPC Documentation](https://grpc.io/docs/)
+- [Docker Compose Documentation](https://docs.docker.com/compose/)
+- [Locust Documentation](https://docs.locust.io/)
+- [REST Assured Documentation](https://rest-assured.io/)
+- [Best README Template](https://github.com/othneildrew/Best-README-Template)
+- [YouTube reference](https://www.youtube.com/watch?v=tseqdcFfTUY&t=1s)
 
 
 
