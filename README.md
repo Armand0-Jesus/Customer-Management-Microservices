@@ -174,16 +174,17 @@ locust -f locustfile.py --host=http://localhost:4004
 
 Ports for each service:
 
-- `4004` API Gateway
-- `4005` Auth Service
 - `4000` Customer Service
 - `4001` Payment Profile Service
 - `4002` Analytics Service
+- `4004` API Gateway
+- `4005` Auth Service
 - `9001` Payment Profile gRPC
 - `5433` Auth DB
 - `5434` Customer DB
 - `6379` Redis
-- `9094` Kafka 
+- `9094` Kafka
+  
 ## Architecture
 
 Below is a diagram of the architecture of this project which shows how all the services are connected and how they function:
