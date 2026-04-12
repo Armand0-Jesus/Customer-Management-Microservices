@@ -5,7 +5,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#description">Description</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -25,7 +25,7 @@
   </ol>
 </details>
 
-## About The Project
+## Description
 This is an enterprise-style customer management system which includes JWT-based authentication, usage of gRPC and REST APIs, rate limiting, caching, Kafka event flows and both load and integration testing. The main operations of the customer management system include:
 
 - Creating customers
@@ -60,13 +60,6 @@ section!
 
 ## Installation
 
-IF you want to use the project locally without docker install:
-
-- Java 21
-- Maven
-- Python 3 and Locust for testing
-- Get a randomly generated JSON token (JWT_SECRET), which can be done by running AuthIntegrationTest.Java in the integration-test folder
-
 Clone the repository:
 
 ```Bash
@@ -74,21 +67,38 @@ git clone https://github.com/Armand0-Jesus/Customer-Management-Microservices.git
 cd Customer-Management-Microservices
 ```
 
-Add JWT_Secret to .env file:
+#### Running with Docker:
+
+dd JWT_Secret to .env file:
 
 ```Bash
-echo "JWT_SECRET=<value>" > .env
+echo "JWT_SECRET=replace_this_with_a_long_random_secret" > .env
 ```
 
-Start the containerized environment for using docker:
+Start the containerized environment:
 
 ```Bash
 docker compose up --build
 ```
 
+#### Running locally (Without Docker):
+
+- Java 21
+- Maven
+- Python 3 and Locust for testing
+-PostgreSQL
+-Redis
+-Kafka
+- Get a randomly generated JSON token (JWT_SECRET JWT_SECRET=replace_this_with_a_long_random_secret)
+
+
+
 ## Usage 
 
-Login:
+Here are examples of the terminal-based commands for the different functionalities of the project:
+
+
+Login and get a tokem:
 
 ```Bash
 curl -X POST http://localhost:4004/auth/login \
@@ -101,14 +111,13 @@ curl -X POST http://localhost:4004/auth/login \
 
 Create a customer:
 
-Here are examples of the terminal-based commands for the different functionalities of the project:
 
 Login:
 
 ```Bash
 curl -X POST http://localhost:4004/api/customers \
   -H "Content-Type: application/json" \
-  -H "Authorization: JWT_SECRET" \
+  -H "Authorization: Bearer your_jwt_token_here" \
   -d '{
     "fullName": "New Customer",
     "email": "new.customer@example.com",
@@ -122,28 +131,36 @@ Get all customers:
 
 ```Bash
 curl http://localhost:4004/api/customers \
-  -H "Authorization: Bearer JWT_SECRET"
+  -H "Authorization: Bearer your_jwt_token_here"
 ```
 
 Update a customer:
 
 ```Bash
-curl http://localhost:4004/api/customers \
-  -H "Authorization: Bearer JWT_SECRET"
+curl -X PUT http://localhost:4004/api/customers/CUSTOMER_ID \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer your_jwt_token_here" \
+  -d '{
+    "fullName": "Updated Customer",
+    "email": "updated.customer@example.com",
+    "shippingAddress": "456 Updated Street, Mayaguez, Puerto Rico 00680",
+    "preferredDropDate": "2026-04-20",
+    "memberSince": "2026-04-11"
+  }'
 ```
 
 Delete a customer:
 
 ```Bash
 curl -X DELETE http://localhost:4004/api/customers/CUSTOMER_ID \
-  -H "Authorization: Bearer JWT_SECRET"
+  -H "Authorization: Bearer your_jwt_token_here"
 ```
 
 Search a customer:
 
 ```Bash
 curl "http://localhost:4004/api/customers/search?query=john" \
-  -H "Authorization: Bearer JWT_SECRET"
+  -H "Authorization: Bearer your_jwt_token_here"
 ```
 
 Integration tests:
