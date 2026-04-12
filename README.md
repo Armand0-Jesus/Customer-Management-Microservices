@@ -61,6 +61,31 @@ section!
 
 ### Installation
 
+IF you want to use the proyect locally without the docker containers install:
+
+- Java 21
+- Maven
+- Python 3 and Locust for testing
+- Get a randomly generated JSON token (JWT_SECRET) which can be done by running AuthIntegrationTest.Java in the integration-test folder
+
+Clone the repository:
+
+```Bash
+git clone https://github.com/Armand0-Jesus/Customer-Management-Microservices.git
+cd Customer-Management-Microservices
+```
+
+Add JWT_Secret to .env file:
+
+```Bash
+echo "JWT_SECRET=<value>" > .env
+```
+
+Start the containerized environment for using docker:
+
+```Bash
+docker compose up --build
+```
 
 ### Usage 
 
@@ -69,7 +94,7 @@ section!
 
 Below is a diagram of the arhictecture of this project which shows how all thhe services are conected and how they function:
 
-![System Architecture](https://github.com/user-attachments/assets/...)<img width="1575" height="680" alt="Screenshot 2026-04-09 122544" src="https://github.com/user-attachments/assets/7021acfd-8358-4600-9d0a-37815a1f6ee9" />
+![](https://github.com/user-attachments/assets/...)<img width="1575" height="680" alt="Screenshot 2026-04-09 122544" src="https://github.com/user-attachments/assets/7021acfd-8358-4600-9d0a-37815a1f6ee9" />
 
 
 
