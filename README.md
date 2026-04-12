@@ -1,5 +1,5 @@
 # Customer Managing Microservices System
-#### Video Demo:
+
 
 <details>
   <summary>Table of Contents</summary>
