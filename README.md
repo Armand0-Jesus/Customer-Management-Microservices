@@ -88,7 +88,7 @@ docker compose up --build
 - PostgreSQL
 - Redis
 - Kafka
-- Get a randomly generated JSON token (JWT_SECRET JWT_SECRET=replace_this_with_a_long_random_secret)
+- Get a randomly generated JSON token (JWT_SECRET=replace_this_with_a_long_random_secret)
 
 
 
